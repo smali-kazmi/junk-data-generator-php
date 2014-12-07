@@ -7,23 +7,8 @@
  */
 
 putenv("cli=1");
-
-/*
-  |---------------------------------------------------------------
-  | CASTING argc AND argv INTO LOCAL VARIABLES
-  |---------------------------------------------------------------
-  |
- */
-$argc = $_SERVER['argc'];
-$argv = $_SERVER['argv'];
-
-// INTERPRETTING INPUT
-if ($argc > 1 && isset($argv[1])) {
-    $_SERVER['PATH_INFO'] = $argv[1];
-    $_SERVER['REQUEST_URI'] = $argv[1];
-} else {
-    die('no param found');
-}
+$options = getopt("d:u:p:h:c:");
+$_SERVER['argv'][1] = isset($options['c']) ? $options['c'] : 'conn/index';
 
 /*
   |---------------------------------------------------------------
